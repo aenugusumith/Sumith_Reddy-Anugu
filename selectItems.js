@@ -172,9 +172,9 @@ module.exports = class selectItems extends Order{
       addressLines.push(country_code);
     }
 
-    const formattedAddress = addressLines.join("\n");
+    const formatAddress = addressLines.join("\n");
 
-    return formattedAddress;
+    return formatAddress;
     }
 
     calculatePrice() {

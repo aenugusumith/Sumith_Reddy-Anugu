@@ -1,22 +1,13 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const selectItems = require('./selectItems');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const _ = require('underscore');
-
-const port = process.env.PORT || parseInt(process.argv.pop()) || 3002;
-
-server.listen(port, function () {
-  console.log("Server listening at port %d", port);
-});
-
-const e = require('express');
 const { exception } = require('console');
-const selectItems = require('./selectItems');
 
 // Create a new express application instance
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("www"));
 
@@ -92,4 +83,10 @@ io.on('connection', function (socket) {
     const sFrom = _.escape(data.from);
     oSockets[sFrom] = socket;
   });
+});
+
+const port = process.env.PORT || parseInt(process.argv.pop()) || 3002;
+
+server.listen(port, function () {
+  console.log("Server listening at port %d", port);
 });
